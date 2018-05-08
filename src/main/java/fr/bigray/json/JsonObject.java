@@ -1,5 +1,7 @@
 package fr.bigray.json;
 
+import fr.bigray.json.parser.JsonParser;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -27,6 +29,10 @@ public class JsonObject extends LinkedHashMap<String, JsonValue> implements Json
         return this;
     }
 
+    public static JsonObject fromJson(String json) {
+        return JsonParser.parse(json).asJsObject();
+    }
+
     @Override
     public String toJson() {
         return "{" + transformToString() + "}";
@@ -38,4 +44,13 @@ public class JsonObject extends LinkedHashMap<String, JsonValue> implements Json
                 .collect(Collectors.joining(","));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

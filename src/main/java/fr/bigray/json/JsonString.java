@@ -1,5 +1,6 @@
 package fr.bigray.json;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class JsonString implements JsonValue {
@@ -10,9 +11,35 @@ public class JsonString implements JsonValue {
         this.value = Optional.ofNullable(value).orElse("null");
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public String toJson() {
         return String.format("\"%s\"", this.value);
     }
 
+
+    @Override
+    public String toString() {
+        return "JsonString{" +
+                "value='" + value + '\'' +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (null == obj) return false;
+        if (!(obj instanceof JsonString)) return true;
+
+        JsonString jsonString = (JsonString) obj;
+
+        return Objects.equals(value, jsonString.getValue());
+    }
 }

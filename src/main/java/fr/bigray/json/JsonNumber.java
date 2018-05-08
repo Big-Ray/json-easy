@@ -2,6 +2,7 @@ package fr.bigray.json;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Objects;
 
 import static fr.bigray.json.utils.SafeValue.safe;
 
@@ -32,5 +33,31 @@ public class JsonNumber implements JsonValue {
     @Override
     public String toJson() {
         return this.value.toPlainString();
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "JsonNumber{" +
+                "value=" + value +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (null == obj) return false;
+        if (!(obj instanceof JsonNumber)) return true;
+
+        JsonNumber jsonNumber = (JsonNumber) obj;
+
+        return Objects.equals(value, jsonNumber.getValue());
     }
 }
