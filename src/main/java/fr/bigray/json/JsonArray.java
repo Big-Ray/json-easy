@@ -20,12 +20,12 @@ public class JsonArray extends LinkedList<JsonValue> implements JsonValue {
         return new JsonArray();
     }
 
-    public JsonArray $(Object value) {
+    public JsonArray £(Object value) {
         this.add(wrap(value));
         return this;
     }
 
-    public JsonArray $$(List<JsonValue> values) {
+    public JsonArray ££(List<JsonValue> values) {
         this.addAll(values);
         return this;
     }

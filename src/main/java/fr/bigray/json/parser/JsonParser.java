@@ -5,6 +5,7 @@ import fr.bigray.json.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 public class JsonParser {
@@ -21,7 +22,7 @@ public class JsonParser {
         var firstCharacter = json.charAt(0);
         var lastCharacter = json.charAt(json.length() - 1);
 
-        if (firstCharacter == OPEN_BRACE && lastCharacter == CLOSE_BRACE) {
+        if (isJson(OPEN_BRACE, CLOSE_BRACE).test(firstCharacter, lastCharacter)) {
             var jsonValue = JsonObject.createObject();
 
             split(json).stream()
@@ -29,23 +30,27 @@ public class JsonParser {
                     .forEach(keysValues -> {
                         var key = keysValues[0];
                         var value = keysValues[1];
+                        var firstChar = value.charAt(0);
+                        var lastChar = value.charAt(value.length() - 1);
 
-                        if (isJsObject(value) || isJsArray(value)) {
-                            jsonValue.$(key, parse(value));
+                        if (isJson(OPEN_BRACE, CLOSE_BRACE).or(isJson(OPEN_BRACKET, CLOSE_BRACKET)).test(firstChar, lastChar)) {
+                            jsonValue.£(key, parse(value));
                         } else {
-                            jsonValue.$(key, wrap(value));
+                            jsonValue.£(key, wrap(value));
                         }
                     });
 
             return jsonValue;
-        } else if (firstCharacter == OPEN_BRACKET && lastCharacter == CLOSE_BRACKET) {
+        } else if (isJson(OPEN_BRACKET, CLOSE_BRACKET).test(firstCharacter, lastCharacter)) {
             var jsonValue = JsonArray.createArray();
 
             split(json).forEach(value -> {
-                if (isJsObject(value) || isJsArray(value)) {
-                    jsonValue.$(parse(value));
+                var firstChar = value.charAt(0);
+                var lastChar = value.charAt(value.length() - 1);
+                if (isJson(OPEN_BRACE, CLOSE_BRACE).or(isJson(OPEN_BRACKET, CLOSE_BRACKET)).test(firstChar, lastChar)) {
+                    jsonValue.£(parse(value));
                 } else {
-                    jsonValue.$(wrap(value));
+                    jsonValue.£(wrap(value));
                 }
             });
 
@@ -56,12 +61,8 @@ public class JsonParser {
 
     }
 
-    private static boolean isJsArray(String value) {
-        return value.charAt(0) == OPEN_BRACKET && value.charAt(value.length() - 1) == CLOSE_BRACKET;
-    }
-
-    private static boolean isJsObject(String value) {
-        return value.charAt(0) == OPEN_BRACE && value.charAt(value.length() - 1) == CLOSE_BRACE;
+    private static BiPredicate<Character, Character> isJson(int open, int close) {
+        return (firstChar, lastChar) -> firstChar == open && lastChar == close;
     }
 
     private static List<Character> splitToCharList(String jsonToSplit) {

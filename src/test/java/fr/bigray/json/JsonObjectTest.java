@@ -9,23 +9,23 @@ class JsonObjectTest {
     @Test
     void toJson() {
         JsonObject address = JsonObject.createObject()
-                .$("number", 4)
-                .$("zipCode", new JsonNumber(17540))
-                .$("street", "Chemin de la gare")
-                .$("city", new JsonString("Le Gué d'Alleré"))
-                .$("digiCode", null);
+                .£("number", 4)
+                .£("zipCode", new JsonNumber(17540))
+                .£("street", "Chemin de la gare")
+                .£("city", new JsonString("Le Gué d'Alleré"))
+                .£("digiCode", null);
 
         JsonObject actual = JsonObject.createObject()
-                .$("firstName", new JsonString("John"))
-                .$("lastName", new JsonString("Doe"))
-                .$("age", new JsonNumber(40))
-                .$("isStrong", new JsonBoolean(true))
-                .$("address", JsonObject.createObject()
-                        .$$(address))
-                .$("hobbies", JsonArray.createArray()
-                        .$("F1")
-                        .$("Rally")
-                        .$("Music"));
+                .£("firstName", new JsonString("John"))
+                .£("lastName", new JsonString("Doe"))
+                .£("age", new JsonNumber(40))
+                .£("isStrong", new JsonBoolean(true))
+                .£("address", JsonObject.createObject()
+                        .££(address))
+                .£("hobbies", JsonArray.createArray()
+                        .£("F1")
+                        .£("Rally")
+                        .£("Music"));
 
         String expectedJson = "{\"firstName\":\"John\",\"lastName\":\"Doe\",\"age\":40,\"isStrong\":true,\"address\":{\"number\":4,\"zipCode\":17540,\"street\":\"Chemin de la gare\",\"city\":\"Le Gué d'Alleré\",\"digiCode\":null},\"hobbies\":[\"F1\",\"Rally\",\"Music\"]}";
 
@@ -39,20 +39,20 @@ class JsonObjectTest {
         JsonObject actual = JsonObject.fromJson(json);
 
         JsonObject expected = JsonObject.createObject()
-                .$("firstName", new JsonString("John"))
-                .$("lastName", new JsonString("Doe"))
-                .$("age", new JsonNumber(40))
-                .$("isStrong", new JsonBoolean(true))
-                .$("address", JsonObject.createObject()
-                        .$("number", 4)
-                        .$("zipCode", new JsonNumber(17540))
-                        .$("street", "Chemin de la gare")
-                        .$("city", new JsonString("Le Gué d'Alleré"))
-                        .$("digiCode", null))
-                .$("hobbies", JsonArray.createArray()
-                        .$("F1")
-                        .$("Rally")
-                        .$("Music"));
+                .£("firstName", new JsonString("John"))
+                .£("lastName", new JsonString("Doe"))
+                .£("age", new JsonNumber(40))
+                .£("isStrong", new JsonBoolean(true))
+                .£("address", JsonObject.createObject()
+                        .£("number", 4)
+                        .£("zipCode", new JsonNumber(17540))
+                        .£("street", "Chemin de la gare")
+                        .£("city", new JsonString("Le Gué d'Alleré"))
+                        .£("digiCode", null))
+                .£("hobbies", JsonArray.createArray()
+                        .£("F1")
+                        .£("Rally")
+                        .£("Music"));
 
         assertEquals(actual, expected);
 

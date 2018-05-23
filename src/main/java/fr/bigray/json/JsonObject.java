@@ -19,12 +19,12 @@ public class JsonObject extends LinkedHashMap<String, JsonValue> implements Json
         return new JsonObject();
     }
 
-    public JsonObject $(String key, Object value) {
+    public JsonObject £(String key, Object value) {
         this.put(key, wrap(value));
         return this;
     }
 
-    public JsonObject $$(Map<String, JsonValue> values) {
+    public JsonObject ££(Map<String, JsonValue> values) {
         this.putAll(values);
         return this;
     }
