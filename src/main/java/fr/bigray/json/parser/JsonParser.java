@@ -34,9 +34,9 @@ public class JsonParser {
                         var lastChar = value.charAt(value.length() - 1);
 
                         if (isJson(OPEN_BRACE, CLOSE_BRACE).or(isJson(OPEN_BRACKET, CLOSE_BRACKET)).test(firstChar, lastChar)) {
-                            jsonValue.£(key, parse(value));
+                            jsonValue.$(key.trim(), parse(value));
                         } else {
-                            jsonValue.£(key, wrap(value));
+                            jsonValue.$(key.trim(), wrap(value.trim()));
                         }
                     });
 
@@ -48,9 +48,9 @@ public class JsonParser {
                 var firstChar = value.charAt(0);
                 var lastChar = value.charAt(value.length() - 1);
                 if (isJson(OPEN_BRACE, CLOSE_BRACE).or(isJson(OPEN_BRACKET, CLOSE_BRACKET)).test(firstChar, lastChar)) {
-                    jsonValue.£(parse(value));
+                    jsonValue.$(parse(value));
                 } else {
-                    jsonValue.£(wrap(value));
+                    jsonValue.$(wrap(value.trim()));
                 }
             });
 
@@ -155,6 +155,9 @@ public class JsonParser {
                     stringBuilder = new StringBuilder();
                     break;
                 case DBL_QUOTE:
+                    if (i == jsonChar.size() - 1) {
+                        jsonEntryList.add(stringBuilder.toString());
+                    }
                     break;
                 default:
                     if (inJsValue) {

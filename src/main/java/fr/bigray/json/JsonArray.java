@@ -5,7 +5,6 @@ import fr.bigray.json.parser.JsonParser;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static fr.bigray.json.utils.WrapValue.wrap;
@@ -20,12 +19,12 @@ public class JsonArray extends LinkedList<JsonValue> implements JsonValue {
         return new JsonArray();
     }
 
-    public JsonArray £(Object value) {
+    public JsonArray $(Object value) {
         this.add(wrap(value));
         return this;
     }
 
-    public JsonArray ££(List<JsonValue> values) {
+    public JsonArray $$(List<JsonValue> values) {
         this.addAll(values);
         return this;
     }

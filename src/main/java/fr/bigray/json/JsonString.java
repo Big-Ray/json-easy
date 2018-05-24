@@ -17,14 +17,14 @@ public class JsonString implements JsonValue {
 
     @Override
     public String toJson() {
-        return String.format("\"%s\"", this.value);
+        return String.format("\"%s\"", this.value.trim());
     }
 
 
     @Override
     public String toString() {
         return "JsonString{" +
-                "value='" + value + '\'' +
+                "value='" + value.trim() + '\'' +
                 '}';
     }
 

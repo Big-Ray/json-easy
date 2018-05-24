@@ -14,41 +14,41 @@ class JsonArrayTest {
     void toJson() {
 
         JsonArray jsonArray = JsonArray.createArray()
-                .£("arr1")
-                .£(12);
+                .$("arr1")
+                .$(12);
 
         JsonArray actual = JsonArray.createArray()
-                .£(JsonObject.createObject()
-                        .£("firstName", "Mick")
-                        .£("lastName", "Tyson")
-                        .£("age", 55)
-                        .£("hobbies", JsonArray.createArray()
-                                .£("Boxe")
-                                .£("Catch")
-                                .£("Movies")))
-                .£(JsonObject.createObject()
-                        .£("firstName", "Alain")
-                        .£("lastName", "Prost")
-                        .£("age", 65)
-                        .£("hobbies", JsonArray.createArray()
-                                .£("F1")
-                                .£("Rally")
-                                .£("Music")))
-                .£(JsonObject.createObject()
-                        .£("firstName", "Big")
-                        .£("lastName", "Ray")
-                        .£("age", 40)
-                        .£("hobbies", JsonArray.createArray()
-                                .£("guitar")
-                                .£("basket ball")))
-                .£("string value")
-                .£(new BigDecimal(3456))
-                .£(new BigInteger("1", 3))
-                .£(123)
-                .£(123.56)
-                .£(1234567L)
-                .£(null)
-                .££(jsonArray);
+                .$(JsonObject.createObject()
+                        .$("firstName", "Mick")
+                        .$("lastName", "Tyson")
+                        .$("age", 55)
+                        .$("hobbies", JsonArray.createArray()
+                                .$("Boxe")
+                                .$("Catch")
+                                .$("Movies")))
+                .$(JsonObject.createObject()
+                        .$("firstName", "Alain")
+                        .$("lastName", "Prost")
+                        .$("age", 65)
+                        .$("hobbies", JsonArray.createArray()
+                                .$("F1")
+                                .$("Rally")
+                                .$("Music")))
+                .$(JsonObject.createObject()
+                        .$("firstName", "Big")
+                        .$("lastName", "Ray")
+                        .$("age", 40)
+                        .$("hobbies", JsonArray.createArray()
+                                .$("guitar")
+                                .$("basket ball")))
+                .$("string value")
+                .$(new BigDecimal(3456))
+                .$(new BigInteger("1", 3))
+                .$(123)
+                .$(123.56)
+                .$(1234567L)
+                .$(null)
+                .$$(jsonArray);
 
         String expected = "[{\"firstName\":\"Mick\",\"lastName\":\"Tyson\",\"age\":55,\"hobbies\":[\"Boxe\",\"Catch\",\"Movies\"]},{\"firstName\":\"Alain\",\"lastName\":\"Prost\",\"age\":65,\"hobbies\":[\"F1\",\"Rally\",\"Music\"]},{\"firstName\":\"Big\",\"lastName\":\"Ray\",\"age\":40,\"hobbies\":[\"guitar\",\"basket ball\"]},\"string value\",3456,1,123,123.56,1234567,null,\"arr1\",12]";
 
@@ -62,27 +62,27 @@ class JsonArrayTest {
         JsonArray actual = JsonArray.fromJson(json);
 
         JsonArray expected = JsonArray.createArray()
-                .£(JsonObject.createObject()
-                        .£("firstName", "Mick")
-                        .£("lastName", "Tyson")
-                        .£("age", 55)
-                        .£("hobbies", JsonArray.createArray()
-                                .£("Boxe")
-                                .£("Catch")
-                                .£("Movies")))
-                .£("string value")
-                .£(new BigDecimal(3456))
-                .£(null)
-                .£(JsonArray.createArray()
-                        .£("arr1")
-                        .£(12));
+                .$(JsonObject.createObject()
+                        .$("firstName", "Mick")
+                        .$("lastName", "Tyson")
+                        .$("age", 55)
+                        .$("hobbies", JsonArray.createArray()
+                                .$("Boxe")
+                                .$("Catch")
+                                .$("Movies")))
+                .$("string value")
+                .$(new BigDecimal(3456))
+                .$(null)
+                .$(JsonArray.createArray()
+                        .$("arr1")
+                        .$(12));
 
 
         assertTrue(actual.containsAll(expected));
 
-        assertEquals(5 ,actual.size());
+        assertEquals(5, actual.size());
         assertTrue(actual.get(0) instanceof JsonObject);
-        assertEquals(4 , actual.get(0).asJsObject().size());
+        assertEquals(4, actual.get(0).asJsObject().size());
         assertEquals("Mick", actual.get(0).asJsObject().get("firstName").asJsString().getValue());
         assertEquals("Tyson", actual.get(0).asJsObject().get("lastName").asJsString().getValue());
         assertEquals(55, actual.get(0).asJsObject().get("age").asJsNumber().getValue().intValue());
@@ -97,5 +97,29 @@ class JsonArrayTest {
 
         assertTrue(actual.get(4) instanceof JsonArray);
         assertEquals(2, actual.get(4).asJsArray().size());
+    }
+
+    @Test
+    void fromJson_nominal_case() {
+        String json = "[ \"value1\", \"value2\", 4 ]";
+        JsonArray actual = JsonArray.fromJson(json);
+
+        JsonArray expected = JsonArray.createArray()
+                .$("value1")
+                .$("value2")
+                .$(4);
+
+        assertTrue(actual.containsAll(expected));
+
+        assertEquals(3, actual.size());
+        assertTrue(actual.get(0) instanceof JsonString);
+        assertEquals("value1", actual.get(0).asJsString().getValue());
+
+        assertTrue(actual.get(1) instanceof JsonString);
+        assertEquals("value2", actual.get(1).asJsString().getValue());
+
+        assertTrue(actual.get(2) instanceof JsonNumber);
+        assertEquals(new BigDecimal(4), actual.get(2).asJsNumber().getValue());
+
     }
 }
