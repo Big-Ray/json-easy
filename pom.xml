@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>Json Easy</name>
-    <description>Lightweight and simple json api write in pure java (10) without any dependencies.</description>
+    <description>Lightweight and simple json api write in pure java without any dependencies.</description>
     <url>https://github.com/Big-Ray/json-easy</url>
     <licenses>
         <license>
