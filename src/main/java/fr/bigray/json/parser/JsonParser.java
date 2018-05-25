@@ -19,19 +19,19 @@ public class JsonParser {
 
     public static JsonValue parse(String json) {
 
-        var firstCharacter = json.charAt(0);
-        var lastCharacter = json.charAt(json.length() - 1);
+        char firstCharacter = json.charAt(0);
+        char lastCharacter = json.charAt(json.length() - 1);
 
         if (isJson(OPEN_BRACE, CLOSE_BRACE).test(firstCharacter, lastCharacter)) {
-            var jsonValue = JsonObject.createObject();
+            JsonObject jsonValue = JsonObject.createObject();
 
             split(json).stream()
                     .map(entry -> entry.trim().split(":", 2))
                     .forEach(keysValues -> {
-                        var key = keysValues[0];
-                        var value = keysValues[1];
-                        var firstChar = value.charAt(0);
-                        var lastChar = value.charAt(value.length() - 1);
+                        String key = keysValues[0];
+                        String value = keysValues[1];
+                        char firstChar = value.charAt(0);
+                        char lastChar = value.charAt(value.length() - 1);
 
                         if (isJson(OPEN_BRACE, CLOSE_BRACE).or(isJson(OPEN_BRACKET, CLOSE_BRACKET)).test(firstChar, lastChar)) {
                             jsonValue.$(key.trim(), parse(value));
@@ -42,11 +42,11 @@ public class JsonParser {
 
             return jsonValue;
         } else if (isJson(OPEN_BRACKET, CLOSE_BRACKET).test(firstCharacter, lastCharacter)) {
-            var jsonValue = JsonArray.createArray();
+            JsonArray jsonValue = JsonArray.createArray();
 
             split(json).forEach(value -> {
-                var firstChar = value.charAt(0);
-                var lastChar = value.charAt(value.length() - 1);
+                char firstChar = value.charAt(0);
+                char lastChar = value.charAt(value.length() - 1);
                 if (isJson(OPEN_BRACE, CLOSE_BRACE).or(isJson(OPEN_BRACKET, CLOSE_BRACKET)).test(firstChar, lastChar)) {
                     jsonValue.$(parse(value));
                 } else {
@@ -101,20 +101,20 @@ public class JsonParser {
 
     private static List<String> split(String json) {
 
-        var jsonEntryList = new ArrayList<String>();
-        var jsonChar = splitToCharList(json);
+        List<String> jsonEntryList = new ArrayList<>();
+        List<Character> jsonChar = splitToCharList(json);
 
         jsonChar.remove(0);
         jsonChar.remove(jsonChar.size() - 1);
 
-        var lastCharacterIdx = jsonChar.size() - 1;
+        int lastCharacterIdx = jsonChar.size() - 1;
 
-        var stringBuilder = new StringBuilder();
-        var jsValueBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder jsValueBuilder = new StringBuilder();
 
-        var inJsValue = false;
+        boolean inJsValue = false;
 
-        for (var i = 0; i < jsonChar.size(); i++) {
+        for (int i = 0; i < jsonChar.size(); i++) {
             switch (jsonChar.get(i)) {
                 case OPEN_BRACE:
                     jsValueBuilder.append(jsonChar.get(i));

@@ -2,7 +2,7 @@
 
 Json-Easy has for vocation to be most simple to create, parse and manipulate Json with Java.
 
-Json-Easy is written in pure Java (10) without any others dependencies to be lightweight as possible.
+Json-Easy is written in pure Java without any others dependencies to be lightweight as possible.
 
 # Getting Started
 <!--

@@ -35,7 +35,7 @@ public interface JsonValue extends Serializable {
         return as(JsonValue.class);
     }
 
-    private <T> T as(Class<T> clazz) {
+    default <T> T as(Class<T> clazz) {
         return clazz.cast(this);
     }
 

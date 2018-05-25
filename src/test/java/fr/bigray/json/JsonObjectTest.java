@@ -82,9 +82,9 @@ class JsonObjectTest {
     void fromJson_nominal_case() {
         String json = "{\"firstName\":\"John\", \"lastName\" : \"Doe\"}";
 
-        var actual = JsonObject.fromJson(json);
+        JsonObject actual = JsonObject.fromJson(json);
 
-        var expected = JsonObject.createObject()
+        JsonObject expected = JsonObject.createObject()
                 .$("firstName", "John")
                 .$("lastName", "Doe");
 
