@@ -4,7 +4,7 @@
 
     <groupId>fr.bigray</groupId>
     <artifactId>json-easy</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
 
     <name>Json Easy</name>
@@ -27,7 +27,7 @@
         <connection>scm:git:git://github.com/Big-Ray/json-easy.git</connection>
         <developerConnection>scm:git:git@github.com:Big-Ray/json-easy.git</developerConnection>
         <url>https://github.com/Big-Ray/json-easy/tree/master</url>
-      <tag>HEAD</tag>
+      <tag>v1.1.1</tag>
   </scm>
 
     <properties>
