@@ -5,25 +5,24 @@ Json-Easy has for vocation to be most simple to create, parse and manipulate Jso
 Json-Easy is written in pure Java without any others dependencies to be lightweight as possible.
 
 # Getting Started
-<!--
 ### Import library
 
 #### Maven
 
 ```xml
 <dependency>
-  <groupId>fr.bigray</groupId>
-  <artifactId>json-easy</artifactId>
-  <version>1.1.0</version>
+    <groupId>fr.bigray</groupId>
+    <artifactId>json-easy</artifactId>
+    <version>1.1.1</version>
 </dependency>
 ``` 
 
 #### Gradle
 
 ```groovy
-compile 'fr.bigray:json-easy:v1.1.0'
+compile 'fr.bigray:json-easy:1.1.1'
 ```
--->
+
 ## Create a JsonObject
 
 ```java
