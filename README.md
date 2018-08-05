@@ -1,28 +1,12 @@
 # Json-Easy
 
+Build status: [![build_status](https://travis-ci.org/Big-Ray/json-easy.svg?branch=master)](https://travis-ci.org/Big-Ray/json-easy)
+
 Json-Easy has for vocation to be most simple to create, parse and manipulate Json with Java.
 
 Json-Easy is written in pure Java without any others dependencies to be lightweight as possible.
 
 # Getting Started
-### Import library
-
-#### Maven
-
-```xml
-<dependency>
-    <groupId>fr.bigray</groupId>
-    <artifactId>json-easy</artifactId>
-    <version>1.1.1</version>
-</dependency>
-``` 
-
-#### Gradle
-
-```groovy
-compile 'fr.bigray:json-easy:1.1.1'
-```
-
 ## Create a JsonObject
 
 ```java
@@ -105,7 +89,7 @@ JsonArray jsArray = JsonArray.fromJson( "[\"value1\", 1234]" );
 
 ## JsonObject and JsonArray manipulation
 
-JsonObject and JsonArray classes extends respectively LinkedHashMap\<String, JsonValue\> and LinkedList\<JsonValue\>, so, if you known how to manipule these Collections, you known to manipulate JsonObject and JsonArray.
+JsonObject and JsonArray classes extends respectively LinkedHashMap\<String, JsonValue\> and ArrayList\<JsonValue\>, so, if you known how to manipule these Collections, you known to manipulate JsonObject and JsonArray.
 
 ## License
 

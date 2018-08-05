@@ -2,14 +2,14 @@ package fr.bigray.json;
 
 import fr.bigray.json.parser.JsonParser;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static fr.bigray.json.utils.WrapValue.wrap;
 
-public class JsonArray extends LinkedList<JsonValue> implements JsonValue {
+public class JsonArray extends ArrayList<JsonValue> implements JsonValue {
 
     private JsonArray() {
         super(Collections.emptyList());

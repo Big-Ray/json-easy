@@ -1,0 +1,12 @@
+language: java
+
+before_install:
+  - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+  - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: bash ./mvnw clean deploy --settings .maven.xml
+  on:
+    all_branches: true
