@@ -3,3 +3,7 @@ language: java
 before_install:
 - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
 - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+
+deploy:
+  provider: script
+  script: ./mvnw clean deploy
