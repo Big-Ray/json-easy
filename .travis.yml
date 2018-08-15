@@ -10,3 +10,6 @@ deploy:
   script: bash ./mvnw clean deploy --settings .maven.xml
   on:
     all_branches: true
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)

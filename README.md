@@ -1,6 +1,7 @@
 # Json-Easy
 
 Build status: [![build_status](https://travis-ci.org/Big-Ray/json-easy.svg?branch=master)](https://travis-ci.org/Big-Ray/json-easy)
+Coverage status : [![codecov](https://codecov.io/gh/Big-Ray/json-easy/branch/master/graph/badge.svg)](https://codecov.io/gh/Big-Ray/json-easy)
 
 Json-Easy has for vocation to be most simple to create, parse and manipulate Json with Java.
 
